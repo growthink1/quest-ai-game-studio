@@ -7,7 +7,6 @@
 // FOUNDATIONS CHAIN
 // ============================================================
 
-// Data is prerequisite to pattern recognition
 MATCH (a:Skill {skill_id: 'ai.foundations.what-is-ai'}),
       (b:Skill {skill_id: 'ai.foundations.data'})
 CREATE (a)-[:REQUIRED_BEFORE {strength: 'hard'}]->(b);
@@ -28,7 +27,6 @@ CREATE (a)-[:REQUIRED_BEFORE {strength: 'hard'}]->(b);
 // SUPERVISED LEARNING CHAIN
 // ============================================================
 
-// Training concept unlocks classification and regression
 MATCH (a:Skill {skill_id: 'ai.foundations.training'}),
       (b:Skill {skill_id: 'ai.supervised.classification.level1'})
 CREATE (a)-[:REQUIRED_BEFORE {strength: 'hard'}]->(b);
@@ -37,41 +35,92 @@ MATCH (a:Skill {skill_id: 'ai.foundations.training'}),
       (b:Skill {skill_id: 'ai.supervised.regression.level1'})
 CREATE (a)-[:REQUIRED_BEFORE {strength: 'hard'}]->(b);
 
-// Level 1 classification before level 2
 MATCH (a:Skill {skill_id: 'ai.supervised.classification.level1'}),
       (b:Skill {skill_id: 'ai.supervised.classification.level2'})
 CREATE (a)-[:REQUIRED_BEFORE {strength: 'hard'}]->(b);
 
-// Both classification and regression before training concepts
 MATCH (a:Skill {skill_id: 'ai.supervised.classification.level1'}),
       (b:Skill {skill_id: 'ai.supervised.training'})
 CREATE (a)-[:REQUIRED_BEFORE {strength: 'hard'}]->(b);
 
-// Training/test split before evaluation
 MATCH (a:Skill {skill_id: 'ai.supervised.training'}),
       (b:Skill {skill_id: 'ai.supervised.evaluation'})
 CREATE (a)-[:REQUIRED_BEFORE {strength: 'hard'}]->(b);
 
 // ============================================================
+// NEURAL NETWORKS CHAIN
+// ============================================================
+
+// Training concept unlocks perceptron (must understand learning before neurons)
+MATCH (a:Skill {skill_id: 'ai.foundations.training'}),
+      (b:Skill {skill_id: 'ai.neural.perceptron'})
+CREATE (a)-[:REQUIRED_BEFORE {strength: 'soft'}]->(b);
+
+// Perceptron before layers
+MATCH (a:Skill {skill_id: 'ai.neural.perceptron'}),
+      (b:Skill {skill_id: 'ai.neural.layers'})
+CREATE (a)-[:REQUIRED_BEFORE {strength: 'hard'}]->(b);
+
+// Layers before activation functions
+MATCH (a:Skill {skill_id: 'ai.neural.layers'}),
+      (b:Skill {skill_id: 'ai.neural.activation'})
+CREATE (a)-[:REQUIRED_BEFORE {strength: 'hard'}]->(b);
+
+// Activation before training (need to understand the network before learning how it trains)
+MATCH (a:Skill {skill_id: 'ai.neural.activation'}),
+      (b:Skill {skill_id: 'ai.neural.training'})
+CREATE (a)-[:REQUIRED_BEFORE {strength: 'hard'}]->(b);
+
+// Conceptual training before mathematical backprop
+MATCH (a:Skill {skill_id: 'ai.neural.training'}),
+      (b:Skill {skill_id: 'ai.neural.training.advanced'})
+CREATE (a)-[:REQUIRED_BEFORE {strength: 'hard'}]->(b);
+
+// Also need supervised evaluation to appreciate training curves
+MATCH (a:Skill {skill_id: 'ai.supervised.evaluation'}),
+      (b:Skill {skill_id: 'ai.neural.training.advanced'})
+CREATE (a)-[:REQUIRED_BEFORE {strength: 'soft'}]->(b);
+
+// Layers before CNN (CNN is a specialized architecture)
+MATCH (a:Skill {skill_id: 'ai.neural.layers'}),
+      (b:Skill {skill_id: 'ai.neural.cnn'})
+CREATE (a)-[:REQUIRED_BEFORE {strength: 'hard'}]->(b);
+
+// Layers before RNN
+MATCH (a:Skill {skill_id: 'ai.neural.layers'}),
+      (b:Skill {skill_id: 'ai.neural.rnn'})
+CREATE (a)-[:REQUIRED_BEFORE {strength: 'hard'}]->(b);
+
+// Both RNN and training.advanced before transformers
+MATCH (a:Skill {skill_id: 'ai.neural.rnn'}),
+      (b:Skill {skill_id: 'ai.neural.transformer'})
+CREATE (a)-[:REQUIRED_BEFORE {strength: 'hard'}]->(b);
+
+MATCH (a:Skill {skill_id: 'ai.neural.training.advanced'}),
+      (b:Skill {skill_id: 'ai.neural.transformer'})
+CREATE (a)-[:REQUIRED_BEFORE {strength: 'soft'}]->(b);
+
+// Transformers connect to LLMs
+MATCH (a:Skill {skill_id: 'ai.neural.transformer'}),
+      (b:Skill {skill_id: 'ai.generative.llm.basics'})
+CREATE (a)-[:REQUIRED_BEFORE {strength: 'soft'}]->(b);
+
+// ============================================================
 // ETHICS CHAIN
 // ============================================================
 
-// Data concepts before privacy
 MATCH (a:Skill {skill_id: 'ai.foundations.data'}),
       (b:Skill {skill_id: 'ai.ethics.privacy'})
 CREATE (a)-[:REQUIRED_BEFORE {strength: 'soft'}]->(b);
 
-// Classification before bias (need to understand what a model does before discussing its failures)
 MATCH (a:Skill {skill_id: 'ai.supervised.classification.level1'}),
       (b:Skill {skill_id: 'ai.ethics.bias'})
 CREATE (a)-[:REQUIRED_BEFORE {strength: 'soft'}]->(b);
 
-// Bias before fairness (fairness requires understanding bias)
 MATCH (a:Skill {skill_id: 'ai.ethics.bias'}),
       (b:Skill {skill_id: 'ai.ethics.fairness'})
 CREATE (a)-[:REQUIRED_BEFORE {strength: 'hard'}]->(b);
 
-// Evaluation before fairness (fairness metrics require evaluation understanding)
 MATCH (a:Skill {skill_id: 'ai.supervised.evaluation'}),
       (b:Skill {skill_id: 'ai.ethics.fairness'})
 CREATE (a)-[:REQUIRED_BEFORE {strength: 'soft'}]->(b);
@@ -80,12 +129,10 @@ CREATE (a)-[:REQUIRED_BEFORE {strength: 'soft'}]->(b);
 // GENERATIVE AI CHAIN
 // ============================================================
 
-// Foundations before LLM basics
 MATCH (a:Skill {skill_id: 'ai.foundations.patterns'}),
       (b:Skill {skill_id: 'ai.generative.llm.basics'})
 CREATE (a)-[:REQUIRED_BEFORE {strength: 'soft'}]->(b);
 
-// LLM basics before limitations and prompt engineering
 MATCH (a:Skill {skill_id: 'ai.generative.llm.basics'}),
       (b:Skill {skill_id: 'ai.generative.llm.limitations'})
 CREATE (a)-[:REQUIRED_BEFORE {strength: 'hard'}]->(b);
