@@ -132,6 +132,106 @@ CREATE (s10:Skill {
 });
 
 // ============================================================
+// NEURAL NETWORKS
+// ============================================================
+
+CREATE (s17:Skill {
+  skill_id: 'ai.neural.perceptron',
+  name: 'The Perceptron: One Neuron',
+  description: 'Learner can describe what a single artificial neuron does — receives inputs, applies weights, produces an output — and connect it to biological neurons as an analogy.',
+  bloom_level: 'Understand',
+  age_band_min: 'upper_elem',
+  difficulty_min: 0.30,
+  difficulty_max: 0.65,
+  mastery_threshold: 0.80,
+  estimated_interactions: 7
+});
+
+CREATE (s18:Skill {
+  skill_id: 'ai.neural.layers',
+  name: 'Layers in a Neural Network',
+  description: 'Learner can identify input, hidden, and output layers in a neural network diagram and explain what each layer does at a conceptual level.',
+  bloom_level: 'Understand',
+  age_band_min: 'upper_elem',
+  difficulty_min: 0.35,
+  difficulty_max: 0.70,
+  mastery_threshold: 0.80,
+  estimated_interactions: 8
+});
+
+CREATE (s19:Skill {
+  skill_id: 'ai.neural.activation',
+  name: 'Activation Functions',
+  description: 'Learner can explain why activation functions are needed (to introduce non-linearity) and describe what happens without them, without requiring mathematical formulas.',
+  bloom_level: 'Understand',
+  age_band_min: 'hs',
+  difficulty_min: 0.45,
+  difficulty_max: 0.75,
+  mastery_threshold: 0.80,
+  estimated_interactions: 8
+});
+
+CREATE (s20:Skill {
+  skill_id: 'ai.neural.training',
+  name: 'How Neural Networks Learn',
+  description: 'Learner can describe gradient descent as finding the lowest point on a loss surface, explain what loss means, and describe forward and backward passes conceptually.',
+  bloom_level: 'Understand',
+  age_band_min: 'hs',
+  difficulty_min: 0.50,
+  difficulty_max: 0.80,
+  mastery_threshold: 0.80,
+  estimated_interactions: 10
+});
+
+CREATE (s21:Skill {
+  skill_id: 'ai.neural.training.advanced',
+  name: 'Gradient Descent and Backpropagation',
+  description: 'Learner can explain how backpropagation uses the chain rule to compute gradients, describe the role of learning rate, and identify signs of overfitting and underfitting in training curves.',
+  bloom_level: 'Analyze',
+  age_band_min: 'hs',
+  difficulty_min: 0.60,
+  difficulty_max: 0.88,
+  mastery_threshold: 0.80,
+  estimated_interactions: 12
+});
+
+CREATE (s22:Skill {
+  skill_id: 'ai.neural.cnn',
+  name: 'Convolutional Neural Networks',
+  description: 'Learner can explain what convolution does to an image, why CNNs are well-suited for visual data, and identify real-world CNN applications.',
+  bloom_level: 'Understand',
+  age_band_min: 'hs',
+  difficulty_min: 0.55,
+  difficulty_max: 0.82,
+  mastery_threshold: 0.80,
+  estimated_interactions: 10
+});
+
+CREATE (s23:Skill {
+  skill_id: 'ai.neural.rnn',
+  name: 'Recurrent Neural Networks and Memory',
+  description: 'Learner can explain why sequential data requires memory, describe how RNNs pass state forward in time, and identify the vanishing gradient problem conceptually.',
+  bloom_level: 'Understand',
+  age_band_min: 'hs',
+  difficulty_min: 0.58,
+  difficulty_max: 0.85,
+  mastery_threshold: 0.80,
+  estimated_interactions: 10
+});
+
+CREATE (s24:Skill {
+  skill_id: 'ai.neural.transformer',
+  name: 'Transformers and Attention',
+  description: 'Learner can explain the attention mechanism as "which parts of the input matter most right now", describe how transformers differ from RNNs, and connect this to LLMs.',
+  bloom_level: 'Analyze',
+  age_band_min: 'hs',
+  difficulty_min: 0.62,
+  difficulty_max: 0.90,
+  mastery_threshold: 0.80,
+  estimated_interactions: 12
+});
+
+// ============================================================
 // AI ETHICS
 // ============================================================
 
